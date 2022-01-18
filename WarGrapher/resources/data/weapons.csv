@@ -1,0 +1,7 @@
+name;damage;mindamage;dist;drop;rpm;headX;bodyX;handX;legX;filename
+Bren;80;30;9.5;5;600;4.7;1;0.8;0.8;weapons_ar37.png
+Abakan;90;40;11;2;500;5;1;1.2;1;weapons_ar43.png
+ACR CQB;50;20;6;2.3;700;5;1;0.9;0.9;weapons_smg52.png
+M5 Custom;80;35;8;3;800;4;1;1;0.9;weapons_smg50.png
+Kel-Tec;110;50;14;2;300;5;1;1;1;weapons_pt39.png
+P99;100;40;13;2;450;4;1;0.8;0.8;weapons_pt05.png

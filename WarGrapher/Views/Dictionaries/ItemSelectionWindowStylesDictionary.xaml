@@ -1,0 +1,102 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:WarGrapher.Views.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Views/Dictionaries/SharedDictionary.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    
+    <!--насколько я понимаю по дефолту в DataContext каждого ListViewItem передается объект данных из ItemsSource
+        но если задан ItemTemplate, то в DataContext передается элемент на котором основан заданный DataTemplate-->
+    <Style x:Key="EquipmentListBoxItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource BeautifulContentControlStyle}">
+        <Setter Property="Border.CornerRadius" Value="9"/>
+        <Setter Property="Margin" Value="6.5"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Content" Value="{Binding}"/>
+    </Style>
+
+
+    <Style x:Key="EquipmentListBoxStyle" TargetType="{x:Type ListBox}">
+        <Style.Setters>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource EquipmentListBoxItemStyle}"/>
+
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemHeight="75" Cursor="Hand" Margin="20" ClipToBounds="False"/>
+                        <!--задание Margin здесь позволяет отодвинуть элементы от края ListView, чтобы их отображение не обрезалось при увеличении
+                            вкупе с ClipToBounds="False" сама WrapPanel не будет их обрезать-->
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+
+    <Style x:Key="DescriptionTableStyle" TargetType="{x:Type controls:EquipmentDescriptionControl}">
+        <Style.Resources>
+            <Duration x:Key="OpacityAnimationDuration">0:0:0.3</Duration>
+        </Style.Resources>
+
+        <Setter Property="Margin" Value="10,20"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Opacity" Value="0.85"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="DescriptionAreaPadding" Value="5"/>
+        <Setter Property="LabelBackground" Value="Khaki"/>
+        <Setter Property="TableBackground" Value="#FFEAEAEA"/>
+        <Setter Property="HeaderRowBackground" Value="WhiteSmoke"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TableBorderThickness" Value="0.7"/>
+        <Setter Property="TableBorderBrush" Value="LightGray"/>
+        <Setter Property="HeaderRowBorderBrush" Value="DimGray"/>
+
+        <Style.Triggers>
+            <Trigger Property="EquipItem" Value="{x:Null}">
+
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             To="0" Duration="{StaticResource OpacityAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             To="1" Duration="{StaticResource OpacityAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="GridSplitterStyle" TargetType="{x:Type GridSplitter}">
+        <Setter Property="ShowsPreview" Value="False"/>
+        <Setter Property="Width" Value="5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+
+    <Style x:Key="SeparatorLineStyle" TargetType="{x:Type Path}" BasedOn="{StaticResource VerticalRightSeparatorLineStyle}">
+        <Style.Setters>
+            <Setter Property="Margin" Value="0,20"/>
+            <Setter Property="Stroke" Value="#FFD6D6D6"/>
+        </Style.Setters>
+    </Style>
+
+
+</ResourceDictionary>

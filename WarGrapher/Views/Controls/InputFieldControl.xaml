@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="WarGrapher.Views.Controls.InputFieldControl"
+             x:Name="UserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:core="clr-namespace:System;assembly=mscorlib"             
+             xmlns:local="clr-namespace:WarGrapher.Views.Controls"         
+             
+             d:DesignHeight="300" d:DesignWidth="300">
+    <!--DataContext="{Binding RelativeSource={RelativeSource Self}}">-->
+    <!--WARNING: лучше не использовать DataContext для привязок внутренних элементов к свойствам UserConrol, 
+    т.к. его значение может быть перезаписано на стороне пользователя, что нарушит всю работу контрола-->
+    
+    <UserControl.Resources>
+
+        <Style x:Key="InputTextBoxStyle" TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="BorderThickness" Value="0,1,1,1"/>
+                <Setter Property="ToolTip" Value="input an item name"/>
+
+                <!--убрать встроенную по-умолчанию обводку элемента при ошибке-->
+                <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+            </Style.Setters>
+
+            <Style.Triggers>
+                <!--триггеры валидации-->
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="Background" Value="#FFFFDFE3"/>
+                    <Setter Property="ToolTip" 
+                            Value="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self} }"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="InputListViewStyle" TargetType="ListView">
+            <Style.Setters>
+                <Setter Property="MinHeight" Value="10"/>
+                <Setter Property="Visibility" Value="Hidden"/>
+            </Style.Setters>
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsFocused, ElementName=TextField}" Value="true">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="InputItemSelectButtonStyle" TargetType="Button">
+            <Style.Setters>
+                <Setter Property="ToolTip" Value="select an item"/>
+                <Setter Property="Background" Value="#FFF4F4F4"/>
+                <Setter Property="BorderThickness" Value="1,1,0,1"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="BorderBrush" Value="{Binding Path=BorderBrush, ElementName=TextField}"/>
+            </Style.Setters>
+        </Style>
+
+        <ControlTemplate x:Key="InputItemSelectButtonTemplate" TargetType="Button">
+            <Button x:Name="button" Style="{StaticResource InputItemSelectButtonStyle}" Command="{TemplateBinding Command}">
+                <Button.Content>
+                    <Rectangle x:Name="rect" Fill="#FFE57272" 
+                               RadiusX="1.5" RadiusY="1.5"
+                               Margin="0" Height="10" Width="10"/>
+                </Button.Content>
+            </Button>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="rect" Property="Fill" Value="Gray"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </UserControl.Resources>
+
+
+    <Grid Height="90">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3.6*"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="ItemSelectionButton" Template="{StaticResource InputItemSelectButtonTemplate}"
+                Click="ItemSelectionButtonClickHandler"
+                Command="{Binding Path=ButtonClickCommand, ElementName=UserControl, Mode=OneWay}"
+                CommandParameter="{Binding Path=ButtonClickCommandParameter, ElementName=UserControl, Mode=OneWay}">
+
+            <!--почему-то коряво работает назначение CommandParameter через встроенное поле у Button - всегда отправляется null  (с самой командой все хорошо)
+                Interaction.Triggers работает нормально и позволяет обойти этот баг или что это
+                но не деактивирует кнопку при возврате false из CanExecute-->
+            <!--
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ItemSelectionButtonClicked" SourceName="UserControl">
+                    <i:InvokeCommandAction 
+                        Command="{Binding Path=ButtonClickCommand, ElementName=UserControl}"
+                        CommandParameter="{Binding Path=ButtonClickCommandParameter, ElementName=UserControl}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            -->
+        </Button>
+
+        <DockPanel Grid.Column="1" Grid.RowSpan="2" LastChildFill="False">
+            <TextBox x:Name="TextField" Style="{StaticResource InputTextBoxStyle}"
+                     Height="{Binding Path=ActualHeight, ElementName=ItemSelectionButton, Mode=OneWay}"
+                     GotFocus="TextFieldFocusedHandler" LostFocus="TextFieldUnfocusedHandler" TextChanged="TextChangedHandler"
+                     DockPanel.Dock="Top">
+                
+                <TextBox.Text>
+                    <Binding Path="OutputText" ElementName="UserControl" 
+                         Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged"
+                         ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="OutputTextChanged" SourceName="UserControl">
+                        <i:InvokeCommandAction  
+                        Command="{Binding Path=TextChangedCommand, ElementName=UserControl}"
+                        CommandParameter="{Binding Path=OutputText, ElementName=UserControl}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+            
+            
+            <ListView x:Name="ItemList" Style="{StaticResource InputListViewStyle}"
+                      ItemsSource="{Binding DataToInput, Mode=OneWay, ElementName=UserControl}"
+                      SelectionMode="Single" SelectionChanged="SelectionItemChangedHandler"   
+                      DockPanel.Dock="Top"/>            
+        </DockPanel>
+
+    </Grid>
+
+
+    <UserControl.Triggers>
+        <EventTrigger SourceName="TextField" RoutedEvent="GotFocus">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetProperty="(Panel.ZIndex)" Storyboard.TargetName="UserControl">
+                    <Int32Animation To="1" Duration="0"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger SourceName="TextField" RoutedEvent="LostFocus">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetProperty="(Panel.ZIndex)" Storyboard.TargetName="UserControl">
+                    <Int32Animation To="0" Duration="0"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+</UserControl>
+    

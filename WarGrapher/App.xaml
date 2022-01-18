@@ -1,0 +1,20 @@
+﻿<Application x:Class="WarGrapher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WarGrapher"
+             
+             ShutdownMode="OnMainWindowClose"
+             Startup="Application_Startup"
+             DispatcherUnhandledException="HandleException">
+
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/resources/body_model/BodyGeomDictionary.xaml"/>
+                <ResourceDictionary Source="/Views/Dictionaries/SharedDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

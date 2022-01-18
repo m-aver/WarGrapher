@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="WarGrapher.Views.Controls.PictorialBodyPartSelectionControl"
+             x:Name="Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:ikriv="clr-namespace:IKriv.Wpf"
+             xmlns:core="clr-namespace:System;assembly=mscorlib"  
+             xmlns:local="clr-namespace:WarGrapher.Views.Controls"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Viewbox Stretch="Uniform">
+        <Viewbox.Resources>
+            <ikriv:MathConverter x:Key="MathConvertor"/>
+            <Duration x:Key="OpacityAnimationDuration">0:0:0.3</Duration>            
+
+            <ControlTemplate x:Key="ToggleTemplate" TargetType="ToggleButton">
+                <Path Name="path" Cursor="Hand"
+                      Stroke="{Binding Path=PartStroke, ElementName=Control, Mode=OneWay}"
+                      Data="{Binding Path=PathData}">
+
+                    <Path.Fill>
+                        <SolidColorBrush Color="{Binding Path=DefaultPartColor, ElementName=Control, Mode=OneWay}">
+                            <SolidColorBrush.Opacity>
+                                <MultiBinding Mode="OneWay" Converter="{StaticResource MathConvertor}" ConverterParameter="a + (b - a)*c">
+                                    <Binding Path="DefaultPartOpacity" ElementName="Control"/>
+                                    <Binding Path="HoveringPartOpacity" ElementName="Control"/>
+                                    <Binding Path="StrokeThickness" ElementName="path"/>
+                                </MultiBinding>
+                            </SolidColorBrush.Opacity>
+                        </SolidColorBrush>
+                    </Path.Fill>
+
+                    <!--StrokeThickness используется как вспомогательный параметр для анимации Opacity
+                        что позволяет обойти freezable issue и параметризировать начальное и конечное значение Opacity во время анимации
+                    
+                        SOURCES:
+                        https://stackoverflow.com/questions/2186933/wpf-animation-binding-to-the-to-attribute-of-storyboard-animation
+                        https://www.codeproject.com/Articles/239251/MathConverter-How-to-Do-Math-in-XAML
+                    
+                        можно было бы не использовать для этого свойство, влияющее на внешний вид, а добавить фиктивный скрытый контрол и использовать его свойства, но это загромоздит код
+                        или можно минимизировать влияние анимации на стороннее свойство StrokeThickness, уменьшив его изменение во время анимации и отмасштабировав на соответствующий коэф вычисления через MathConvertor-->
+                </Path>
+
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter TargetName="path" Property="Fill" Value="{Binding Path=SelectionPartFill, ElementName=Control, Mode=OneWay}"/>
+                    </Trigger>
+
+                    <!--MultiTrigger позволяет указать несколько условий-->
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsChecked" Value="False"/>
+                            <Condition Property="IsMouseOver" Value="False"/>
+                        </MultiTrigger.Conditions>
+
+                        <MultiTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard TargetName ="path" TargetProperty = "StrokeThickness">
+                                    <DoubleAnimation To = "0" Duration = "{StaticResource OpacityAnimationDuration}"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </MultiTrigger.EnterActions>
+
+                        <MultiTrigger.ExitActions>
+                            <BeginStoryboard Name="OpacityAnimation">
+                                <Storyboard TargetName ="path" TargetProperty = "StrokeThickness">
+                                    <DoubleAnimation To = "1" Duration = "{StaticResource OpacityAnimationDuration}"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </MultiTrigger.ExitActions>
+                    </MultiTrigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+        </Viewbox.Resources>
+
+        <Canvas Width="{Binding ActualWidth, ElementName=img, Mode=OneWay}"
+                Height="{Binding ActualHeight, ElementName=img, Mode=OneWay}">
+
+            <!--слой картинки-->
+            <Image x:Name="img" Stretch="Fill" Source="{Binding Path=ImageSource, ElementName=Control, Mode=OneWay}"/>
+
+            <!--слой кнопок-->
+            <ListView Background="Transparent" BorderThickness="0" Margin="-1,-1,0,0"
+                      Width="{Binding ActualWidth, ElementName=img, Mode=OneWay}" 
+                      Height="{Binding ActualHeight, ElementName=img, Mode=OneWay}"
+                      ItemsSource="{Binding Path=PartsData, ElementName=Control, Mode=OneWay}">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <RadioButton x:Name="toggleButton"
+                                                    GroupName="SelectBodyPart"                                                     
+                                                    Template="{StaticResource ToggleTemplate}"
+                                                    Command="{Binding Path=SelectionCommand, ElementName=Control, Mode=OneWay}"
+                                                    CommandParameter="{Binding Path=BodyPart}"
+                                                    IsChecked="{Binding Path=IsInitiallySelected, Mode=OneTime}"/>
+                                    <!--IsChecked первоначально устанавливается и выбор отображается, но не вызывается команда
+                                        поправил с помощью ручного вызова команды в обработчике изменений PartsData-->
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+
+        </Canvas>
+    </Viewbox>
+
+</UserControl>

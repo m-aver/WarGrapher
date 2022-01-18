@@ -1,0 +1,4 @@
+name;armor bonus;damage absorb;damage factor sub;filename
+Magma;0;0;0.7;magma.png
+Combat;0;0;0.6;combat.png
+Standart;0;0;0.1;standart.png

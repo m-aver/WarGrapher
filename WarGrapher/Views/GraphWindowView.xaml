@@ -1,0 +1,63 @@
+﻿<views:WindowViewBase x:Class="WarGrapher.Views.GraphWindowView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+                      mc:Ignorable="d"
+                      
+                      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      xmlns:views="clr-namespace:WarGrapher.Views"
+                      xmlns:controls="clr-namespace:WarGrapher.Views.Controls"  
+                      xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"        
+        
+                      Title="GraphWindow" Height="420" Width="550"
+                      Background="#FFD1DFEE"
+                      DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <ResourceDictionary Source="/Views/Dictionaries/GraphWindowStylesDictionary.xaml"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="29"/>
+        </Grid.RowDefinitions>
+
+        <!--chart-->
+        <controls:PlotWrapper Title="{Binding Path=ViewModel.GraphData.GraphLabel, FallbackValue=A_Graph, Mode=OneWay}"                                
+                              Series="{Binding Path=ViewModel.DataSeries, Mode=OneWay}"                              
+                              Style="{StaticResource PlotStyle}">
+            <oxy:Plot.Axes>
+                <oxy:LinearAxis x:Name="XAxis" Position="Bottom"
+                                Title="{Binding Path=ViewModel.GraphData.XLabel, FallbackValue=X_Axis, Mode=OneWay}" 
+                                Style="{StaticResource PlotAxisStyle}"/>
+                <oxy:LinearAxis x:Name="YAxis" Position="Left"
+                                Title="{Binding Path=ViewModel.GraphData.YLabel, FallbackValue=Y_Axis, Mode=OneWay}" 
+                                Style="{StaticResource PlotAxisStyle}"/>
+            </oxy:Plot.Axes>
+        </controls:PlotWrapper>
+
+        <!--CheckBox for subscribe to model-->
+        <CheckBox x:Name="SubscribeCheckBox" 
+                  Grid.Row="1"                 
+                  Content="Enable to update graph"
+                  IsChecked="{Binding Path=ViewModel.IsSubscribe, Mode=OneWay}"
+                  Style="{StaticResource SubscribingCheckBoxStyle}">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Checked">
+                    <i:InvokeCommandAction Command="{Binding Path=ViewModel.SubscribeGraphCommand, Mode=OneWay}"/>
+                </i:EventTrigger>
+
+                <i:EventTrigger EventName="Unchecked">
+                    <i:InvokeCommandAction Command="{Binding Path=ViewModel.UnsubscribeGraphCommand, Mode=OneWay}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </CheckBox>
+
+        <!--visual separator of areas-->
+        <Path Grid.Row="1"
+              Style="{StaticResource SeparatorLineStyle}"/>
+
+    </Grid>
+</views:WindowViewBase>

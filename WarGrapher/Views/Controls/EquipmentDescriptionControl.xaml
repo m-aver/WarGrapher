@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="WarGrapher.Views.Controls.EquipmentDescriptionControl"
+             x:Name="Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             
+             xmlns:ikriv="clr-namespace:IKriv.Wpf"
+             xmlns:local="clr-namespace:WarGrapher.Views.Controls"
+             xmlns:core="clr-namespace:System;assembly=mscorlib"
+             xmlns:convert="clr-namespace:WarGrapher.Views.Converters"              
+             
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <convert:EquipItemToParamsTableConverter x:Key="ParamsConverter"/>
+        <convert:DoubleToCornerRadiusConverter x:Key="CornerConverter"/>
+        <convert:DoubleToThicknessConverter x:Key="ThicknessConverter"/>
+        <ikriv:MathConverter x:Key="MathConverter"/>
+    </UserControl.Resources>
+
+    <Border x:Name="main"
+            DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+            Background="{Binding Background}"
+            CornerRadius="{Binding CornerRadius, Converter={StaticResource CornerConverter}, ConverterParameter=all}">
+        <DockPanel LastChildFill="True">
+            <!--item name-->
+            <Border DockPanel.Dock="Top"
+                    Background="{Binding LabelBackground}" 
+                    CornerRadius="{Binding CornerRadius, Converter={StaticResource CornerConverter}, ConverterParameter=top}"
+                    Padding="{Binding DescriptionAreaPadding}">
+                <TextBlock x:Name="ItemName" HorizontalAlignment="Stretch"
+                           Text="{Binding EquipItem.Name}" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+            </Border>
+
+            <!--item parameters table-->
+            <Border DockPanel.Dock="Bottom"
+                    Background="{Binding TableBackground}"  
+                    CornerRadius="{Binding CornerRadius, Converter={StaticResource CornerConverter}, ConverterParameter=bottom}"
+                    Padding="{Binding DescriptionAreaPadding}"
+                    VerticalAlignment="Stretch">
+                <ListView Background="Transparent" BorderThickness="0"
+                          ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ItemsSource="{Binding EquipItem, Converter={StaticResource ParamsConverter}}">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <!--settings of grid rendering-->
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="BorderBrush" Value="{Binding Path=TableBorderBrush, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay}"/>
+                            <Setter Property="BorderThickness" Value="{Binding Path=TableBorderThickness, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay, Converter={StaticResource ThicknessConverter}, ConverterParameter=0;0;0;1}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <!--style of labels row-->
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Background" Value="{Binding Path=HeaderRowBackground, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay}"/>
+                                    <Setter Property="BorderBrush" Value="{Binding Path=HeaderRowBorderBrush, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay}"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <!--чот хреново работает масштабирование столбцов, если задавать через стили-->
+                                    <!--OLD--> <!--<Setter Property="Width" Value="{Binding Path=ActualWidth ,RelativeSource={RelativeSource AncestorType=ListView}, Mode=OneWay, Converter={StaticResource ColumnWidthConverter}, ConverterParameter=2}"/>-->
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+
+                            <!--column of parameter names-->
+                            <GridViewColumn Header="Param">
+                                <GridViewColumn.Width>
+                                    <MultiBinding Mode="OneWay" Converter="{StaticResource MathConverter}" ConverterParameter="a/b">
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=ListView}"/>
+                                        <Binding Path="Columns.Count" RelativeSource="{RelativeSource AncestorType=GridView}"/>
+                                    </MultiBinding>
+                                </GridViewColumn.Width>
+                                
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="{Binding Path=TableBorderBrush, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay}" 
+                                                BorderThickness="{Binding Path=TableBorderThickness, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay, Converter={StaticResource ThicknessConverter}, ConverterParameter=0;0;1;0}"
+                                                Margin="0,0,-7,0">
+                                            <!-- right margin = -7 т.к. в GridView есть какое-то встроенное смещение колонок -->
+
+                                            <TextBlock Background="Transparent"
+                                                       Text="{Binding Path=Name, Mode=OneWay}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--column of parameter values-->
+                            <GridViewColumn Header="Value"
+                                            DisplayMemberBinding="{Binding Path=Value, Mode=OneWay}">
+                                <GridViewColumn.Width>
+                                    <MultiBinding Mode="OneWay" Converter="{StaticResource MathConverter}" ConverterParameter="a/b">
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=ListView}"/>
+                                        <Binding Path="Columns.Count" RelativeSource="{RelativeSource AncestorType=GridView}"/>
+                                    </MultiBinding>
+                                </GridViewColumn.Width>
+                            </GridViewColumn>
+                            
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+        </DockPanel>
+    </Border>
+
+</UserControl>
+    

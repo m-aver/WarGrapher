@@ -1,0 +1,954 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="WarGrapher.Models.Calculation.DamageCalculation">
+    <Position X="35.75" Y="14" Width="2.25" />
+    <Members>
+      <Field Name="_maxDistance" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Models\Calculation\DamageCalculation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Models.Calculation.DpsCalculation">
+    <Position X="35.75" Y="16.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Models\Calculation\DpsCalculation.cs</FileName>
+      <NewMemberFileName>Models\Calculation\DPSCalculation.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Models.Calculation.PlotDataCalculation">
+    <Position X="33.75" Y="10.25" Width="3.25" />
+    <AssociationLine Name="weaponsData" Type="WarGrapher.Models.Equipment.Weapon" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="37" Y="11.527" />
+        <Point X="40.409" Y="11.527" />
+        <Point X="40.409" Y="15.139" />
+        <Point X="42" Y="15.139" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.078" Y="-0.292" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="bodyArmorData" Type="WarGrapher.Models.Equipment.BodyArmor" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="37" Y="11.92" />
+        <Point X="39.912" Y="11.92" />
+        <Point X="39.912" Y="17.938" />
+        <Point X="45.25" Y="17.938" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.224" Y="0.13" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="focusedBodyPartArmorData" Type="WarGrapher.Models.Equipment.Armor" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="37" Y="11.118" />
+        <Point X="45.402" Y="11.118" />
+        <Point X="45.402" Y="14.435" />
+        <Point X="48.25" Y="14.435" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.184" Y="-0.307" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_model" Type="WarGrapher.Models.ISelectedDataConsumer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="33.75" Y="12.296" />
+        <Point X="31.812" Y="12.296" />
+        <Point X="31.812" Y="18.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.797" Y="0.145" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgACgABAgAAAAIQAACAAAAAAAAKAAAAAAA=</HashCode>
+      <FileName>Models\Calculation\PlotDataCalculation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+      <Property Name="bodyArmorData" />
+      <Property Name="focusedBodyPartArmorData" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="weaponsData" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WarGrapher.Models.Calculation.TtkCalculation">
+    <Position X="32.75" Y="14" Width="2.25" />
+    <Members>
+      <Field Name="_maxDistance" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Models\Calculation\TtkCalculation.cs</FileName>
+      <NewMemberFileName>Models\Calculation\TTKCalculation.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.DataAccessLayer.CsvFileContext" BaseTypeListCollapsed="true">
+    <Position X="24.25" Y="4.25" Width="3.75" />
+    <NestedTypes>
+      <Struct Name="WarGrapher.DataAccessLayer.CsvFileContext.ResourcePaths" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DataAccessLayer\CsvFileContext.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <AssociationLine Name="_allData" Type="WarGrapher.Models.Equipment.EquipItem">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.238" Y="0.184" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CAAAAIAAAAABAAAAAAAAAAAAAACAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>DataAccessLayer\CsvFileContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_allData" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Orientation="Bottom" Position="1.216" />
+  </Class>
+  <Class Name="WarGrapher.Models.Model" BaseTypeListCollapsed="true">
+    <Position X="24" Y="11.25" Width="4" />
+    <Members>
+      <Field Name="_focusedBodyPart" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_selectedData" Type="WarGrapher.Models.Equipment.EquipItem" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="27" Y="11.25" />
+        <Point X="27" Y="9.745" />
+        <Point X="46.5" Y="9.745" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.12" Y="0.101" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_charts" Type="WarGrapher.Common.IObserver" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="24" Y="14.266" />
+        <Point X="18.108" Y="14.266" />
+        <Point X="18.108" Y="26.875" />
+        <Point X="19.292" Y="26.875" Type="JumpStart" />
+        <Point X="19.458" Y="26.875" Type="JumpEnd" />
+        <Point X="20.5" Y="26.875" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.117" Y="-0.277" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAgAAIEAAAEgABKAAAAAAQAQAgAgAAgAAAAEgA=</HashCode>
+      <FileName>Models\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_dataContext" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_selectedData" />
+      <Field Name="_charts" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Orientation="Bottom" Position="2.081" />
+  </Class>
+  <Class Name="WarGrapher.Models.ModelFactory">
+    <Position X="28.5" Y="13.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ModelFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ModelInstance" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WarGrapher.Models.Equipment.Armor">
+    <Position X="48.25" Y="13.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Equipment\Armor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Models.Equipment.ArmsArmor">
+    <Position X="48" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Equipment\ArmsArmor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Models.Equipment.BodyArmor">
+    <Position X="45.25" Y="16.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAgAAAACAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Equipment\BodyArmor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Models.Equipment.EquipItem">
+    <Position X="46.5" Y="9.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAgAAAAEQAAAAAgIAAAAEAAAEAAAA=</HashCode>
+      <FileName>Models\Equipment\EquipItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Models.Equipment.HeadArmor">
+    <Position X="49.75" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Equipment\HeadArmor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Models.Equipment.LegsArmor">
+    <Position X="51.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Equipment\LegsArmor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Models.Equipment.Weapon">
+    <Position X="42" Y="13.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABhACIgAAAAAAAAAAAAAADAEBAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Equipment\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.BodyPartSelectionViewModel">
+    <Position X="41.5" Y="28.75" Width="3.25" />
+    <Members>
+      <Method Name="CanSendBodyPart" Hidden="true" />
+      <Method Name="SendBodyPart" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="WarGrapher.ViewModels.ElementViewModel" FixedToPoint="true">
+      <Path>
+        <Point X="43.125" Y="27.691" />
+        <Point X="43.125" Y="28.75" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="_model" Type="WarGrapher.Models.IBodyPartDataProvider" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="42.188" Y="30.886" />
+        <Point X="42.188" Y="32.17" />
+        <Point X="39.771" Y="32.17" Type="JumpStart" />
+        <Point X="39.605" Y="32.17" Type="JumpEnd" />
+        <Point X="39.395" Y="32.17" Type="JumpStart" />
+        <Point X="39.229" Y="32.17" Type="JumpEnd" />
+        <Point X="39.021" Y="32.17" Type="JumpStart" />
+        <Point X="38.855" Y="32.17" Type="JumpEnd" />
+        <Point X="36.89" Y="32.17" />
+        <Point X="36.89" Y="21.305" />
+        <Point X="27.621" Y="21.305" />
+        <Point X="27.621" Y="19.353" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAgAAAAAAEAAAAAAAGAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\BodyPartSelectionViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.CalculationSelectionViewModel">
+    <Position X="38" Y="28.75" Width="3" />
+    <Members>
+      <Method Name="CanCreateGraph" Hidden="true" />
+      <Method Name="CreateGraph" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="WarGrapher.ViewModels.CalculationSelectionViewModel.CalculationInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\CalculationSelectionViewModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="_graphViewModel" Type="WarGrapher.ViewModels.IPlotCalculator" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="39.312" Y="31.338" />
+        <Point X="39.312" Y="37.388" />
+        <Point X="34.708" Y="37.388" Type="JumpStart" />
+        <Point X="34.542" Y="37.388" Type="JumpEnd" />
+        <Point X="34.145" Y="37.388" Type="JumpStart" />
+        <Point X="33.979" Y="37.388" Type="JumpEnd" />
+        <Point X="27.722" Y="37.388" Type="JumpStart" />
+        <Point X="27.556" Y="37.388" Type="JumpEnd" />
+        <Point X="27.397" Y="37.388" Type="JumpStart" />
+        <Point X="27.231" Y="37.388" Type="JumpEnd" />
+        <Point X="25.583" Y="37.388" Type="JumpStart" />
+        <Point X="25.417" Y="37.388" Type="JumpEnd" />
+        <Point X="21.625" Y="37.388" />
+        <Point X="21.625" Y="36.604" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.416" Y="0.121" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_errorViewModel" Type="WarGrapher.ViewModels.IErrorRecorder" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="38.938" Y="31.338" />
+        <Point X="38.938" Y="35.312" />
+        <Point X="35.25" Y="35.312" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_graphViewFactory" Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="39.688" Y="31.338" />
+        <Point X="39.688" Y="34.794" />
+        <Point X="39.688" Y="34.794" />
+        <Point X="39.688" Y="38" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.529" Y="0.094" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_model" Type="WarGrapher.Models.ISelectedDataConsumer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="38" Y="30.625" />
+        <Point X="37.332" Y="30.625" />
+        <Point X="37.332" Y="20.981" />
+        <Point X="30.895" Y="20.981" />
+        <Point X="30.895" Y="19.997" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAgAAAAAwAAAAAACgIAAAAAAAAgAAkAAAA=</HashCode>
+      <FileName>ViewModels\CalculationSelectionViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_graphViewModel" />
+      <Field Name="_errorViewModel" />
+      <Field Name="_graphViewFactory" />
+      <Field Name="_model" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ElementViewModel" Collapsed="true">
+    <Position X="42" Y="27" Width="2.25" />
+    <InheritanceLine Type="WarGrapher.ViewModels.ViewModelBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="43" Y="24.997" />
+        <Point X="43" Y="26.625" />
+        <Point X="43" Y="26.625" />
+        <Point X="43" Y="27" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ElementViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.EquipItemViewModel">
+    <Position X="51" Y="26.5" Width="3" />
+    <InheritanceLine Type="WarGrapher.ViewModels.ViewModelBase" ManuallyRouted="true">
+      <Path>
+        <Point X="43" Y="24.997" />
+        <Point X="43" Y="25.643" />
+        <Point X="52.5" Y="25.643" />
+        <Point X="52.5" Y="26.5" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="EquipItem" Type="WarGrapher.Models.Equipment.EquipItem" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="54" Y="26.94" />
+        <Point X="54.422" Y="26.94" />
+        <Point X="54.422" Y="11.173" />
+        <Point X="49.5" Y="11.173" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.163" Y="0.078" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_viewFactory" Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="53.188" Y="29.338" />
+        <Point X="53.188" Y="39.125" />
+        <Point X="40.75" Y="39.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_errorViewModel" Type="WarGrapher.ViewModels.IErrorRecorder" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="52.812" Y="29.338" />
+        <Point X="52.812" Y="35.812" />
+        <Point X="47.145" Y="35.812" Type="JumpStart" />
+        <Point X="46.979" Y="35.812" Type="JumpEnd" />
+        <Point X="46.771" Y="35.812" Type="JumpStart" />
+        <Point X="46.605" Y="35.812" Type="JumpEnd" />
+        <Point X="39.771" Y="35.812" Type="JumpStart" />
+        <Point X="39.605" Y="35.812" Type="JumpEnd" />
+        <Point X="39.395" Y="35.812" Type="JumpStart" />
+        <Point X="39.229" Y="35.812" Type="JumpEnd" />
+        <Point X="35.25" Y="35.812" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAgAAAAAAAAgAAAAEQAAAAAgIAAAAAgAEEAAAA=</HashCode>
+      <FileName>ViewModels\EquipItemViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_viewFactory" />
+      <Field Name="_errorViewModel" />
+      <Property Name="EquipItem" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ErrorWindowViewModel">
+    <Position X="32" Y="30.75" Width="3.25" />
+    <Members>
+      <Method Name="CanClearErrorRecords" Hidden="true" />
+      <Method Name="ClearErrorRecords" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_model" Type="WarGrapher.Models.IModelErrorNotifier" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35.25" Y="32.625" />
+        <Point X="36.017" Y="32.625" />
+        <Point X="36.017" Y="21.992" />
+        <Point X="22" Y="21.992" />
+        <Point X="22" Y="19.353" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAARAAAgAAAAAABAAAAAQEAAAAAAoAAAA=</HashCode>
+      <FileName>ViewModels\ErrorWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Bottom" Position="1.665" />
+  </Class>
+  <Class Name="WarGrapher.ViewModels.GraphWindowViewModel">
+    <Position X="20.25" Y="30.75" Width="3" />
+    <Members>
+      <Field Name="_calculation" Hidden="true" />
+      <Field Name="_graphData" Hidden="true" />
+      <Field Name="_isSubscribe" Hidden="true" />
+      <Method Name="CanSubscribe" Hidden="true" />
+      <Method Name="CanUnsubscribe" Hidden="true" />
+      <Method Name="Subscribe" Hidden="true" />
+      <Method Name="Unsubscribe" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="WarGrapher.ViewModels.GraphWindowViewModel.Series" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\GraphWindowViewModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="WarGrapher.ViewModels.GraphWindowViewModel.GraphInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\GraphWindowViewModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <AssociationLine Name="Calculation" Type="WarGrapher.Models.Calculation.PlotDataCalculation" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="32.034" />
+        <Point X="17.517" Y="32.034" />
+        <Point X="17.517" Y="10.785" />
+        <Point X="25.479" Y="10.785" Type="JumpStart" />
+        <Point X="25.646" Y="10.785" Type="JumpEnd" />
+        <Point X="26.917" Y="10.785" Type="JumpStart" />
+        <Point X="27.083" Y="10.785" Type="JumpEnd" />
+        <Point X="33.75" Y="10.785" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_viewFactory" Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="32.372" />
+        <Point X="18.919" Y="32.372" />
+        <Point X="18.919" Y="38.688" />
+        <Point X="27.231" Y="38.688" Type="JumpStart" />
+        <Point X="27.397" Y="38.688" Type="JumpEnd" />
+        <Point X="37.5" Y="38.688" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_mainViewModel" Type="WarGrapher.ViewModels.IWindowRegistrator" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="33.068" />
+        <Point X="19.709" Y="33.068" />
+        <Point X="19.709" Y="37.843" />
+        <Point X="25.5" Y="37.843" />
+        <Point X="25.5" Y="36.546" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.344" Y="0.091" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_model" Type="WarGrapher.Common.IObservable" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="31.684" />
+        <Point X="19.375" Y="31.684" />
+        <Point X="19.375" Y="19.738" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_errorViewModel" Type="WarGrapher.ViewModels.IErrorRecorder" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="32.709" />
+        <Point X="19.305" Y="32.709" />
+        <Point X="19.305" Y="38.275" />
+        <Point X="27.231" Y="38.275" Type="JumpStart" />
+        <Point X="27.397" Y="38.275" Type="JumpEnd" />
+        <Point X="34.625" Y="38.275" />
+        <Point X="34.625" Y="36.434" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.344" Y="0.111" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CAQAAAAgAACAQAAAAgAABAADAFACCABAQAhAAEoAACA=</HashCode>
+      <FileName>ViewModels\GraphWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_viewFactory" />
+      <Field Name="_mainViewModel" />
+      <Field Name="_model" />
+      <Field Name="_errorViewModel" />
+      <Property Name="Calculation" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Bottom" Position="1.3" />
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ItemInputViewModel">
+    <Position X="45.25" Y="28.75" Width="3.5" />
+    <Members>
+      <Method Name="CanOpenSelectionWindow" Hidden="true" />
+      <Method Name="CanResetItem" Hidden="true" />
+      <Method Name="CanSendItem" Hidden="true" />
+      <Method Name="CanSendItemName" Hidden="true" />
+      <Method Name="OpenSelectionWindow" Hidden="true" />
+      <Method Name="ResetItem" Hidden="true" />
+      <Method Name="SendItem" Hidden="true" />
+      <Method Name="SendItemName" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="AcceptableItems" Type="WarGrapher.ViewModels.EquipItemViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="48.75" Y="30.884" />
+        <Point X="50.072" Y="30.884" />
+        <Point X="50.072" Y="28.125" />
+        <Point X="51" Y="28.125" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-3.27" Y="-1.559" Height="0.182" Width="4" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="SentItem" Type="WarGrapher.ViewModels.EquipItemViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="48.75" Y="30.623" />
+        <Point X="49.787" Y="30.623" />
+        <Point X="49.787" Y="27.875" />
+        <Point X="51" Y="27.875" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.253" Y="0.04" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_model" Type="WarGrapher.Models.IEquipmentDataProvider" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="46.312" Y="31.655" />
+        <Point X="46.312" Y="32.621" />
+        <Point X="39.771" Y="32.621" Type="JumpStart" />
+        <Point X="39.605" Y="32.621" Type="JumpEnd" />
+        <Point X="39.395" Y="32.621" Type="JumpStart" />
+        <Point X="39.229" Y="32.621" Type="JumpEnd" />
+        <Point X="39.021" Y="32.621" Type="JumpStart" />
+        <Point X="38.855" Y="32.621" Type="JumpEnd" />
+        <Point X="36.458" Y="32.621" />
+        <Point X="36.458" Y="21.667" />
+        <Point X="24.875" Y="21.667" />
+        <Point X="24.875" Y="19.546" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_selectionWindowFactory" Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="47.062" Y="31.655" />
+        <Point X="47.062" Y="38.688" />
+        <Point X="40.75" Y="38.688" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_selectionViewModel" Type="WarGrapher.ViewModels.IDataSelector&lt;T&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="46.688" Y="31.655" />
+        <Point X="46.688" Y="36.964" />
+        <Point X="39.771" Y="36.964" Type="JumpStart" />
+        <Point X="39.605" Y="36.964" Type="JumpEnd" />
+        <Point X="39.395" Y="36.964" Type="JumpStart" />
+        <Point X="39.229" Y="36.964" Type="JumpEnd" />
+        <Point X="34.708" Y="36.964" Type="JumpStart" />
+        <Point X="34.542" Y="36.964" Type="JumpEnd" />
+        <Point X="34.145" Y="36.964" Type="JumpStart" />
+        <Point X="33.979" Y="36.964" Type="JumpEnd" />
+        <Point X="29.5" Y="36.964" />
+        <Point X="29.5" Y="36.554" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.597" Y="0.101" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAEAAABAIAAgIAQgAgAQACAAACABACEQgIAAAAAAAAs=</HashCode>
+      <FileName>ViewModels\ItemInputViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+      <Field Name="_selectionWindowFactory" />
+      <Field Name="_selectionViewModel" />
+      <Property Name="SentItem" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="AcceptableItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ItemSelectionWindowViewModel&lt;T&gt;">
+    <Position X="28.25" Y="30.75" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAgAAAAAAAAAQAAAQAAABQAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ItemSelectionWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="1.275" />
+  </Class>
+  <Class Name="WarGrapher.ViewModels.MainWindowViewModel">
+    <Position X="24" Y="30.75" Width="3" />
+    <Members>
+      <Method Name="CanCloseAllGraph" Hidden="true" />
+      <Method Name="CanOpenErrorWindow" Hidden="true" />
+      <Method Name="CloseAllGraph" Hidden="true" />
+      <Method Name="OpenErrorWindow" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="_errorViewFactory" Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="27" Y="32.812" />
+        <Point X="27.314" Y="32.812" />
+        <Point X="27.314" Y="39.125" />
+        <Point X="37.5" Y="39.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_errorViewModel" Type="WarGrapher.ViewModels.IErrorRecorder" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="27" Y="32.5" />
+        <Point X="27.639" Y="32.5" />
+        <Point X="27.639" Y="37.842" />
+        <Point X="34.062" Y="37.842" />
+        <Point X="34.062" Y="36.434" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.125" Y="0.119" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_subWindows" Type="WarGrapher.ViewModels.WindowViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="24" Y="31.854" />
+        <Point X="23.741" Y="31.854" />
+        <Point X="23.741" Y="29" />
+        <Point X="26.75" Y="29" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAhAEABAABAAoAAAAACAAIQAAAAAAAAACQAABA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_errorViewFactory" />
+      <Field Name="_errorViewModel" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_subWindows" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Orientation="Bottom" Position="1.08" />
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ViewModelBase">
+    <Position X="41.5" Y="23.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAQAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.146" />
+  </Class>
+  <Class Name="WarGrapher.ViewModels.WindowViewModel">
+    <Position X="26.75" Y="26.25" Width="2.5" />
+    <InheritanceLine Type="WarGrapher.ViewModels.ViewModelBase" ManuallyRouted="true">
+      <Path>
+        <Point X="43" Y="24.997" />
+        <Point X="43" Y="25.65" />
+        <Point X="37.415" Y="25.65" Type="JumpStart" />
+        <Point X="37.249" Y="25.65" Type="JumpEnd" />
+        <Point X="36.973" Y="25.65" Type="JumpStart" />
+        <Point X="36.807" Y="25.65" Type="JumpEnd" />
+        <Point X="36.541" Y="25.65" Type="JumpStart" />
+        <Point X="36.375" Y="25.65" Type="JumpEnd" />
+        <Point X="36.1" Y="25.65" Type="JumpStart" />
+        <Point X="35.934" Y="25.65" Type="JumpEnd" />
+        <Point X="28" Y="25.65" />
+        <Point X="28" Y="26.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>CABAAAAAAAAAEABAAAAAAMAAAAAACAAAAAAAAAAACAI=</HashCode>
+      <FileName>ViewModels\WindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.516" />
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ViewFactories.ErrorWindowFactory">
+    <Position X="34.5" Y="41.5" Width="2" />
+    <InheritanceLine Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="39.125" Y="40.709" />
+        <Point X="39.125" Y="41.131" />
+        <Point X="35.375" Y="41.131" />
+        <Point X="35.375" Y="41.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>ViewModels\ViewFactories\ErrorWindowFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ViewFactories.GraphWindowFactory">
+    <Position X="42" Y="41.5" Width="2" />
+    <InheritanceLine Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" ManuallyRouted="true">
+      <Path>
+        <Point X="39.125" Y="40.709" />
+        <Point X="39.125" Y="41.135" />
+        <Point X="43" Y="41.135" />
+        <Point X="43" Y="41.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>ViewModels\ViewFactories\GraphWindowFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ViewFactories.ItemSelectionWindowFactory">
+    <Position X="37" Y="41.5" Width="2" />
+    <InheritanceLine Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" ManuallyRouted="true">
+      <Path>
+        <Point X="39.125" Y="40.709" />
+        <Point X="39.125" Y="41.139" />
+        <Point X="38" Y="41.139" />
+        <Point X="38" Y="41.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>ViewModels\ViewFactories\ItemSelectionWindowFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ViewFactories.MainWindowFactory">
+    <Position X="39.5" Y="41.5" Width="2" />
+    <InheritanceLine Type="WarGrapher.ViewModels.ViewFactories.WindowFactory" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="39.125" Y="40.709" />
+        <Point X="39.125" Y="41.14" />
+        <Point X="40.438" Y="41.14" />
+        <Point X="40.438" Y="41.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>ViewModels\ViewFactories\MainWindowFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.ViewModels.ViewFactories.WindowFactory">
+    <Position X="37.5" Y="38" Width="3.25" />
+    <Members>
+      <Method Name="ConfigureComponents" Hidden="true" />
+      <Method Name="FindMemberByKey" Hidden="true" />
+      <Method Name="ValidateComponents" Hidden="true" />
+      <Method Name="ValidateMemberTemplate" Hidden="true" />
+      <Method Name="ValidateViewModel" Hidden="true" />
+      <Method Name="ValidateWindow" Hidden="true" />
+      <Method Name="WindowFactory" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gAAIAEAAEAAAACEAAAAwCAAAAAAAAABAAAAEAEBgAAA=</HashCode>
+      <FileName>ViewModels\ViewFactories\WindowFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Views.ErrorWindowView">
+    <Position X="21.75" Y="45.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ErrorWindowView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGrapher.Views.GraphWindowView">
+    <Position X="13.5" Y="45.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\GraphWindowView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.406" />
+  </Class>
+  <Class Name="WarGrapher.Views.ItemSelectionWindowView">
+    <Position X="19" Y="45.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ItemSelectionWindowView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.487" />
+  </Class>
+  <Class Name="WarGrapher.Views.MainWindowView">
+    <Position X="16.25" Y="45.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainWindowView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.469" />
+  </Class>
+  <Class Name="WarGrapher.Views.WindowViewBase">
+    <Position X="13.5" Y="41.25" Width="2.25" />
+    <Members>
+      <Field Name="_viewModel" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="System.Windows.Window" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.625" Y="40.441" />
+        <Point X="14.625" Y="41.25" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="ViewModel" Type="WarGrapher.ViewModels.WindowViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.5" Y="42.062" />
+        <Point X="12.958" Y="42.062" />
+        <Point X="12.958" Y="28" />
+        <Point X="17.434" Y="28" Type="JumpStart" />
+        <Point X="17.6" Y="28" Type="JumpEnd" />
+        <Point X="19.292" Y="28" Type="JumpStart" />
+        <Point X="19.458" Y="28" Type="JumpEnd" />
+        <Point X="26.75" Y="28" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQIAAAAQgAkAAAAEBAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\WindowViewBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Window" Collapsed="true">
+    <Position X="13.5" Y="39.75" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="WarGrapher.DataAccessLayer.ConfigHelpers.ConfigReader">
+    <Position X="18" Y="4.25" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>EAAQBAAAgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>DataAccessLayer\ConfigHelpers\ConfigReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="WarGrapher.Common.IObserver">
+    <Position X="20.5" Y="26.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\Observer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.Common.IObservable">
+    <Position X="18.75" Y="18.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Common\Observer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.Models.IModel" Collapsed="true">
+    <Position X="24.75" Y="16.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.Models.ISelectedDataConsumer">
+    <Position X="29" Y="18.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAQAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Models\IModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.Models.IBodyPartDataProvider">
+    <Position X="26.75" Y="18.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Models\IModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.Models.IEquipmentDataProvider">
+    <Position X="23.25" Y="18.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.Models.IModelErrorNotifier">
+    <Position X="21" Y="18.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.ViewModels.IErrorRecorder" HideInheritanceLine="true">
+    <Position X="32.75" Y="34.75" Width="2.5" />
+    <InheritanceLine Type="WarGrapher.ViewModels.IWindowViewModel" IsHidden="true" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ErrorWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.ViewModels.IPlotCalculator">
+    <Position X="20.5" Y="35.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\GraphWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.ViewModels.IDataSelector&lt;T&gt;" HideInheritanceLine="true">
+    <Position X="28.25" Y="35" Width="2.5" />
+    <InheritanceLine Type="WarGrapher.ViewModels.IWindowViewModel" IsHidden="true" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ItemSelectionWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.ViewModels.IWindowRegistrator">
+    <Position X="24.5" Y="35.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.ViewModels.IWindowViewModel">
+    <Position X="26.75" Y="24" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>ViewModels\WindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WarGrapher.DataAccessLayer.IEquipmentDataContext">
+    <Position X="24.25" Y="6.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataAccessLayer\IEquipmentDataContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

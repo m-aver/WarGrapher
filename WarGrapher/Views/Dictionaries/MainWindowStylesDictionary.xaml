@@ -1,0 +1,299 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:core="clr-namespace:System;assembly=mscorlib"
+                    xmlns:controls="clr-namespace:WarGrapher.Views.Controls"
+                    xmlns:ikriv="clr-namespace:IKriv.Wpf">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Views/Dictionaries/SharedDictionary.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    
+    <Thickness x:Key="MainRowMargin">0,20</Thickness>
+
+
+    <ControlTemplate x:Key="LabelTextTemplate" 
+                     TargetType="{x:Type TextBox}">
+        <ControlTemplate.Resources>
+            <Duration x:Key="LabelAnimationDuration">0:0:0.35</Duration>
+            <core:Double x:Key="OpacityInitValue">0.5</core:Double>
+            <core:Double x:Key="ScaleFinalValue">1.15</core:Double>
+            <ikriv:MathConverter x:Key="MathConverter"/>
+        </ControlTemplate.Resources>
+        
+        <Border x:Name="LabelBorder" 
+                Padding="{TemplateBinding Padding}"
+                CornerRadius="{TemplateBinding Border.CornerRadius}"
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                RenderTransformOrigin="0.5,0.5">
+            <Border.Background>
+                <SolidColorBrush x:Name="bgBrush" 
+                                 Color="{Binding Path=Background.Color, RelativeSource={RelativeSource TemplatedParent}}" 
+                                 Opacity="{StaticResource OpacityInitValue}"/>
+            </Border.Background>
+            <Border.RenderTransform>
+                <ScaleTransform x:Name="scaleBorder"/>
+            </Border.RenderTransform>
+
+            <TextBlock x:Name="LabelText" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}"
+                       Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" TextAlignment="Center"
+                       FontSize="{TemplateBinding FontSize}">
+                <TextBlock.RenderTransform>
+                    <ScaleTransform x:Name="scaleText" ScaleY="{Binding Path=ScaleY, ElementName=scaleBorder, Mode=OneWay, Converter={StaticResource MathConverter}, ConverterParameter=1/x}"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Panel}}, Mode=OneWay}" 
+                         Value="true">
+
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="bgBrush" Storyboard.TargetProperty="Opacity"
+                                             To="1" Duration="{StaticResource LabelAnimationDuration}"/>
+                            <DoubleAnimation Storyboard.TargetName="scaleBorder" Storyboard.TargetProperty="ScaleY"
+                                             To="{StaticResource ScaleFinalValue}" Duration="{StaticResource LabelAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="bgBrush" Storyboard.TargetProperty="Opacity"
+                                             To="{StaticResource OpacityInitValue}" Duration="{StaticResource LabelAnimationDuration}"/>
+                            <DoubleAnimation Storyboard.TargetName="scaleBorder" Storyboard.TargetProperty="ScaleY"
+                                             To="1" Duration="{StaticResource LabelAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <Style x:Key="LabelTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Background" Value="Khaki"/>
+        <Setter Property="Foreground" Value="DimGray"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="DockPanel.Dock" Value="Top"/>
+
+        <Setter Property="Template" Value="{StaticResource LabelTextTemplate}"/>
+    </Style>
+
+
+    <Style x:Key="LabeledPanelStyle" TargetType="{x:Type Panel}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+
+    <Style x:Key="SeparatorLineStyle" TargetType="Path" BasedOn="{StaticResource VerticalRightSeparatorLineStyle}">
+        <Style.Setters>
+            <Setter Property="DockPanel.Dock" Value="Right"/>
+            <Setter Property="Margin" Value="{StaticResource MainRowMargin}"/>
+            <Setter Property="Stroke" Value="#FFD6D6D6"/>
+        </Style.Setters>
+    </Style>
+
+
+    <Style x:Key="BodyPartSelectionStyle" TargetType="controls:PictorialBodyPartSelectionControl">
+        <Setter Property="Opacity" Value="0.9"/>
+        <Setter Property="DefaultPartOpacity" Value="0.15"/>
+        <Setter Property="HoveringPartOpacity" Value="0.45"/>
+        <Setter Property="PartStroke" Value="Gray"/>
+        <Setter Property="DefaultPartColor" Value="#FFFFAF5E"/>
+        <Setter Property="SelectionPartFill">
+            <Setter.Value>
+                <LinearGradientBrush Opacity="0.7">
+                    <GradientStop Color="#FFD72639" Offset="1"/>
+                    <GradientStop Color="#FFD6747E" Offset="0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <Style x:Key="ArmorSelectButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BasedButtonStyle}">
+        <Style.Resources>
+            <Brush x:Key="BackgroundOnMouseOver">#FFC8C8C8</Brush>
+            <Brush x:Key="BackgroundOnDisable">DarkGray</Brush>
+            <Brush x:Key="BackgroundOnPressing">WhiteSmoke</Brush>
+            <Brush x:Key="BorderBrushOnPressing">DimGray</Brush>
+
+            <ikriv:MathConverter x:Key="MathConverter"/>
+            <core:String x:Key="SidesRatioExpression">x*3/4</core:String>
+        </Style.Resources>
+
+        <Style.Setters>
+            <Setter Property="Border.CornerRadius" Value="3"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="5,0,5,12"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Height" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource MathConverter}, ConverterParameter={StaticResource SidesRatioExpression}}"/>
+        </Style.Setters>
+    </Style>
+
+
+    <Style x:Key="CalculationButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BasedButtonStyle}">
+        <Style.Resources>
+            <Brush x:Key="BackgroundOnMouseOver">#FFC75062</Brush>
+            <Brush x:Key="ForegroundOnMouseOver">#FFE4C475</Brush>
+
+            <Brush x:Key="BackgroundOnPressing">#FFE8DC6D</Brush>
+            <Brush x:Key="ForegroundOnPressing">#FF8B2A34</Brush>
+            <Brush x:Key="BorderBrushOnPressing">#FF8B2A34</Brush>
+
+            <Brush x:Key="BackgroundOnDisable">LightGray</Brush>
+            <Brush x:Key="ForegroundOnDisable">Black</Brush>
+            <Brush x:Key="BorderBrushOnDisable">Black</Brush>
+        </Style.Resources>
+        
+        <Style.Setters>
+            <Setter Property="Background" Value="#FF903C3C"/>
+            <Setter Property="Foreground" Value="#FFEDBCBC"/>
+            <Setter Property="BorderBrush" Value="#FF903C3C"/>
+
+            <Setter Property="Border.CornerRadius" Value="4"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="12,5"/>
+
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="{x:Type core:String}">
+                        <TextBlock Text="{Binding StringFormat=Create a new &#x0d;&#x0a;{0} graph}"
+                                   TextWrapping="WrapWithOverflow"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+
+    <Style x:Key="CalculationListBoxStyle" TargetType="{x:Type ListBox}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#FFEAEAEA"/>
+            <Setter Property="BorderBrush" Value="#FF999393"/>
+            <Setter Property="BorderThickness" Value="0,2,0,1"/>
+
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemHeight="auto" ItemWidth="auto"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+
+    <Style x:Key="InputFieldStyle" TargetType="controls:InputFieldControl">
+        <Setter Property="Margin" Value="30,0,50,-30"/>
+    </Style>
+
+
+    <Style x:Key="OptionsButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BasedButtonStyle}">
+        <Style.Resources>
+            <Brush x:Key="BackgroundOnMouseOver">GhostWhite</Brush>
+            <Brush x:Key="ForegroundOnMouseOver">Gray</Brush>
+
+            <Brush x:Key="BackgroundOnPressing">WhiteSmoke</Brush>
+            <Brush x:Key="ForegroundOnPressing">DimGray</Brush>
+
+            <Brush x:Key="BackgroundOnDisable">#FFC7C7D9</Brush>
+            <Brush x:Key="ForegroundOnDisable">SlateGray</Brush>
+        </Style.Resources>
+        
+        <Style.Setters>
+            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=Panel}}"/>
+            <Setter Property="Foreground" Value="DimGray"/>
+            <Setter Property="BorderBrush" Value="SlateGray"/>
+            <Setter Property="Border.CornerRadius" Value="0"/>
+            <Setter Property="BorderThickness" Value="0,0.5"/>
+            <Setter Property="Margin" Value="0,-0.25"/>     <!--для взаимного перекрытия границ соседних кнопок-->
+            <Setter Property="Padding" Value="0,2"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" 
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+
+    <!--подразумевается, что в DataContext будет передано количество новых ошибок-->
+    <Style x:Key="ErrorsCountTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Style.Resources>
+            <Color x:Key="AttentionColor">LightYellow</Color>
+            <Duration x:Key="AttentionAnimationDuration">0:0:0.7</Duration>
+        </Style.Resources>
+        
+        <Style.Setters>
+            <Setter Property="Text" Value="{Binding StringFormat=New errors: {0}}"/>
+
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="DarkRed"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style.Setters>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding}" Value="0">
+                <Setter Property="Visibility" Value="Hidden"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding}" Value="1">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard AutoReverse="True">
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                            To="{StaticResource AttentionColor}" 
+                                            Duration="{StaticResource AttentionAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="OptionsLabeledPanelStyle" TargetType="{x:Type Panel}" BasedOn="{StaticResource LabeledPanelStyle}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#FFDBDBE8"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="OptionsLabelTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource LabelTextBoxStyle}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#FFB2B2CA"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style.Setters>
+    </Style>
+
+
+</ResourceDictionary>

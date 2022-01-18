@@ -1,0 +1,219 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:core="clr-namespace:System;assembly=mscorlib">
+
+
+    <Style x:Key="BasedSeparatorLineStyle" TargetType="{x:Type Path}">
+        <Style.Setters>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeStartLineCap" Value="Round"/>
+            <Setter Property="StrokeEndLineCap" Value="Round"/>
+            <Setter Property="Stretch" Value="Fill"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect x:Name="shadow" Color ="Black" Opacity="0.1" BlurRadius="5" ShadowDepth="0" RenderingBias="Performance" Direction="0"/>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="VerticalRightSeparatorLineStyle" TargetType="{x:Type Path}" BasedOn="{StaticResource BasedSeparatorLineStyle}">
+        <Style.Setters>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Data">
+                <Setter.Value>
+                    <LineGeometry StartPoint="0,0" EndPoint="0,1"/>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="HorizontalTopSeparatorLineStyle" TargetType="{x:Type Path}" BasedOn="{StaticResource BasedSeparatorLineStyle}">
+        <Style.Setters>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Data">
+                <Setter.Value>
+                    <LineGeometry StartPoint="0,0" EndPoint="1,0"/>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+
+    <!--c DynamicResource и таким ControlTemplate можно быстро задавать параметры через соответсвующие ресурсы в целевых стилях
+        или можно перезаписывать поведение параметров, заданное в триггере шаблона, реализуя собственные триггеры в целевом стиле
+        очень удобно-->
+    <ControlTemplate x:Key="BorderContentControl" TargetType="{x:Type ContentControl}">
+        <Border CornerRadius="{TemplateBinding Border.CornerRadius}"
+                BorderThickness="{TemplateBinding BorderThickness}" 
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                Background="{TemplateBinding Background}"
+                Padding="{TemplateBinding Padding}">
+
+            <ContentControl Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                            Foreground="{TemplateBinding Foreground}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{DynamicResource BackgroundOnMouseOver}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundOnMouseOver}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderBrushOnMouseOver}"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{DynamicResource BackgroundOnDisable}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundOnDisable}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderBrushOnDisable}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <Style x:Key="BorderButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template" Value="{StaticResource BorderContentControl}"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" Value="{DynamicResource BackgroundOnPressing}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundOnPressing}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderBrushOnPressing}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="BasedButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BorderButtonStyle}">
+        <Style.Setters>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style.Setters>
+    </Style>
+
+    <!--renders the smooth shadow effect 
+        when the mouse hovers over-->
+    <Style x:Key="BeautifulContentControlStyle" TargetType="{x:Type ContentControl}">
+        <Style.Resources>
+            <core:Double x:Key="BackgroundInitOpacity">0.1</core:Double>
+            <core:Double x:Key="BackgroundFinalOpacity">1</core:Double>
+            <core:Double x:Key="FinalBlurRadius">15</core:Double>
+            <core:Double x:Key="ScaleFinalValue">1.1</core:Double>
+            <Duration x:Key="OpacityAnimationDuration">0:0:0.4</Duration>
+            <Duration x:Key="BlurRadiusAnimationDuration">0:0:0.6</Duration>
+            <Duration x:Key="ScaleAnimationDuration">0:0:0.3</Duration>
+        </Style.Resources>
+
+        <Style.Setters>
+            <Setter Property="Template" Value="{StaticResource BorderContentControl}"/>
+
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color ="Black" Opacity="0.45" ShadowDepth="0" BlurRadius="0" RenderingBias="Performance" Direction="0"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="White" Opacity="{StaticResource BackgroundInitOpacity}"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.BlurRadius"
+                                             To = "{StaticResource FinalBlurRadius}" Duration = "{StaticResource BlurRadiusAnimationDuration}"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Background.Opacity"
+                                             To = "{StaticResource BackgroundFinalOpacity}" Duration = "{StaticResource OpacityAnimationDuration}"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                             To = "{StaticResource ScaleFinalValue}" Duration = "{StaticResource ScaleAnimationDuration}"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                             To = "{StaticResource ScaleFinalValue}" Duration = "{StaticResource ScaleAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.BlurRadius"
+                                             To = "0" Duration = "{StaticResource BlurRadiusAnimationDuration}"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Background.Opacity" 
+                                             To = "{StaticResource BackgroundInitOpacity}" Duration = "{StaticResource OpacityAnimationDuration}"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                             To = "1" Duration = "{StaticResource ScaleAnimationDuration}"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                             To = "1" Duration = "{StaticResource ScaleAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    
+    <!--wraps a content with the border 
+        that renders the rotating gleam effect 
+        when the mouse hovers over-->
+    <Style x:Key="ResponceBorderStyle" TargetType="{x:Type ContentControl}">
+        <Style.Resources>
+            <Duration x:Key="AnimationDuration">0:0:0.7</Duration>
+            <Color x:Key="BlickColor">White</Color>
+        </Style.Resources>
+
+        <Style.Setters>
+            <Setter Property="Template" Value="{StaticResource BorderContentControl}"/>
+
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="{Binding Path=Foreground.Color, RelativeSource={RelativeSource AncestorType=ContentControl}}" 
+                                      Offset="0.25"/>
+                        <GradientStop Color="{Binding Path=Foreground.Color, RelativeSource={RelativeSource AncestorType=ContentControl}}" 
+                                      Offset="0.5" x:Name="targetGS"/>
+                        <GradientStop Color="{Binding Path=Foreground.Color, RelativeSource={RelativeSource AncestorType=ContentControl}}" 
+                                      Offset="0.75"/>
+
+                        <LinearGradientBrush.RelativeTransform>
+                            <RotateTransform x:Name="rotate" CenterX="0.5" CenterY="0.5" Angle="0"/>
+                        </LinearGradientBrush.RelativeTransform>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard FillBehavior="Stop" Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="BorderBrush.RelativeTransform.Angle"
+                                             To="180" Duration="{StaticResource AnimationDuration}"/>
+                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.GradientStops[1].Color"
+                                            To="{StaticResource BlickColor}" Duration="{StaticResource AnimationDuration}"
+                                            SpeedRatio="2" AutoReverse="True"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+</ResourceDictionary>

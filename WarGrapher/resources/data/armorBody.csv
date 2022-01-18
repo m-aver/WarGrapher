@@ -1,0 +1,4 @@
+name;armor bonus;damage absorb;damage factor sub;filename
+Python;50;10;0;python.png
+Combat;50;0;0;combat.png
+Arma;25;0;0;arma.png

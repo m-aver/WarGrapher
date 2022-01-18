@@ -1,0 +1,165 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:core="clr-namespace:System;assembly=mscorlib" 
+                    xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Views/Dictionaries/SharedDictionary.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <ControlTemplate x:Key="SubscribingCheckBoxTemplate" TargetType="{x:Type CheckBox}">
+        <ControlTemplate.Resources>
+            <Duration x:Key="CheckedAnimationDuration">0:0:0.3</Duration>            
+        </ControlTemplate.Resources>
+
+        <StackPanel Orientation="Horizontal"
+                    Background="{TemplateBinding Background}">
+
+            <!--responsive border wrapper-->
+            <ContentControl Foreground="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                            Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}">
+                <ContentControl.Style>
+                    <Style TargetType="{x:Type ContentControl}" BasedOn="{StaticResource ResponceBorderStyle}">
+                        <Setter Property="Border.CornerRadius" 
+                                Value="{Binding Path=(Border.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"/>
+                    </Style>
+                </ContentControl.Style>
+
+                <ContentControl.Content>
+                    <!--button template-->
+                    <Rectangle Margin="-0.25"
+                               RadiusX="{Binding Path=(Border.CornerRadius).TopLeft, RelativeSource={RelativeSource TemplatedParent}}"
+                               RadiusY="{Binding Path=(Border.CornerRadius).TopLeft, RelativeSource={RelativeSource TemplatedParent}}">
+                        <Rectangle.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop x:Name="outerGS" Color="#FF887E7E" Offset="1"/>
+                                <GradientStop x:Name="middleGS" Color="#FFA28F8F" Offset="0.702"/>
+                                <GradientStop x:Name="innerGS" Color="#FFD0A27E" Offset="0.161"/>
+                            </RadialGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </ContentControl.Content>
+            </ContentControl>
+
+            <ContentControl Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Foreground="{TemplateBinding Foreground}"/>
+        </StackPanel>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty ="Color" FillBehavior="HoldEnd" DesiredFrameRate="120">
+                            <ColorAnimation Storyboard.TargetName="outerGS"
+                                            BeginTime="0:0:0.2" To="#FFB6A82B" Duration="{StaticResource CheckedAnimationDuration}"/>
+                            <ColorAnimation Storyboard.TargetName="middleGS"
+                                            BeginTime="0:0:0.1" To="#FFB1B643" Duration="{StaticResource CheckedAnimationDuration}"/>
+                            <ColorAnimation Storyboard.TargetName="innerGS"
+                                            BeginTime="0:0:0.0" To="#FFDAFF39" Duration="{StaticResource CheckedAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty ="Color" FillBehavior="HoldEnd" DesiredFrameRate="120">
+                            <ColorAnimation Storyboard.TargetName="outerGS"
+                                            BeginTime="0:0:0.0" To="#FF887E7E" Duration="{StaticResource CheckedAnimationDuration}"/>
+                            <ColorAnimation Storyboard.TargetName="middleGS"
+                                            BeginTime="0:0:0.1" To="#FFA28F8F" Duration="{StaticResource CheckedAnimationDuration}"/>
+                            <ColorAnimation Storyboard.TargetName="innerGS"
+                                            BeginTime="0:0:0.2" To="#FFD0A27E" Duration="{StaticResource CheckedAnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <Style x:Key="SubscribingCheckBoxStyle" TargetType="{x:Type CheckBox}">
+        <Style.Setters>
+            <Setter Property="Margin" Value="14,5"/>
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+
+            <Setter Property="Border.CornerRadius" Value="4"/>
+            <Setter Property="BorderThickness" Value="1.7"/>
+            <Setter Property="BorderBrush" Value="DimGray"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="Template" Value="{StaticResource SubscribingCheckBoxTemplate}"/>
+
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Margin="4,0" VerticalAlignment="Center"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF5C4462"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="PlotAxisStyle" TargetType="{x:Type oxy:LinearAxis}">
+        <Style.Setters>
+            <Setter Property="MajorGridlineStyle" Value="Solid"/>
+            <Setter Property="MinorGridlineStyle" Value="Dot"/>
+        </Style.Setters>
+    </Style>
+
+
+    <Style x:Key="PlotStyle" TargetType="{x:Type oxy:Plot}">
+        <Style.Setters>
+            <Setter Property="PlotType" Value="XY"/>
+            <Setter Property="PlotMargins" Value="Auto,Auto,5,Auto"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="TitleFontSize" Value="13"/>
+            <Setter Property="TitlePadding" Value="9"/>
+
+            <Setter Property="LegendTitle" Value="legend"/>
+            <Setter Property="LegendOrientation" Value="Vertical"/>
+            <Setter Property="LegendPlacement" Value="Inside"/>
+            <Setter Property="LegendPosition" Value="TopRight"/>
+            <Setter Property="LegendBackground" Value="#3F5B769D"/>
+            <Setter Property="LegendTitleFontWeight" Value="Medium"/>
+            <Setter Property="LegendTitleFontSize" Value="10"/>
+            <Setter Property="LegendMargin" Value="3"/>
+            <Setter Property="LegendPadding" Value="4"/>
+
+            <Setter Property="DefaultColors">
+                <Setter.Value>
+                    <x:Array Type="Color">
+                        <Color>Blue</Color>
+                        <Color>Red</Color>
+                        <Color>Green</Color>
+                        <Color>Orange</Color>
+                        <Color>Purple</Color>
+                        <Color>Black</Color>
+                    </x:Array>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>        
+    </Style>
+
+
+    <Style x:Key="SeparatorLineStyle" TargetType="Path" BasedOn="{StaticResource HorizontalTopSeparatorLineStyle}">
+        <Style.Setters>
+            <Setter Property="Stroke" Value="#FF9BB3B2"/>
+            <Setter Property="Margin" Value="10,0"/>
+        </Style.Setters>
+    </Style>
+
+
+</ResourceDictionary>
