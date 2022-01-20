@@ -42,9 +42,6 @@
     </Style>
 
 
-    <!--c DynamicResource и таким ControlTemplate можно быстро задавать параметры через соответсвующие ресурсы в целевых стилях
-        или можно перезаписывать поведение параметров, заданное в триггере шаблона, реализуя собственные триггеры в целевом стиле
-        очень удобно-->
     <ControlTemplate x:Key="BorderContentControl" TargetType="{x:Type ContentControl}">
         <Border CornerRadius="{TemplateBinding Border.CornerRadius}"
                 BorderThickness="{TemplateBinding BorderThickness}" 

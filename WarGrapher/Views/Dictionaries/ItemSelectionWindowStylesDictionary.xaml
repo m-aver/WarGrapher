@@ -6,8 +6,6 @@
     </ResourceDictionary.MergedDictionaries>
 
     
-    <!--насколько я понимаю по дефолту в DataContext каждого ListViewItem передается объект данных из ItemsSource
-        но если задан ItemTemplate, то в DataContext передается элемент на котором основан заданный DataTemplate-->
     <Style x:Key="EquipmentListBoxItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource BeautifulContentControlStyle}">
         <Setter Property="Border.CornerRadius" Value="9"/>
         <Setter Property="Margin" Value="6.5"/>
@@ -29,8 +27,6 @@
                 <Setter.Value>
                     <ItemsPanelTemplate>
                         <WrapPanel ItemHeight="75" Cursor="Hand" Margin="20" ClipToBounds="False"/>
-                        <!--задание Margin здесь позволяет отодвинуть элементы от края ListView, чтобы их отображение не обрезалось при увеличении
-                            вкупе с ClipToBounds="False" сама WrapPanel не будет их обрезать-->
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>

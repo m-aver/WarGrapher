@@ -46,7 +46,7 @@ namespace WarGrapher.DataAccessLayer
                 }
                 catch
                 {
-                    _allData = new HashSet<EquipItem>();    //FIXIT (SOLVED): 1 исключение - 8 сообщений об ошибке: по 1 на каждый элемент ввода
+                    _allData = new HashSet<EquipItem>();
                     throw;
                 }
             }
@@ -83,7 +83,7 @@ namespace WarGrapher.DataAccessLayer
                     Delimiters = new string[] { ConfigReader.GetColumnSeparator().ToString() }
                 })
                 {
-                    if (parser.LineNumber == 1)     //счетчик строк начинается с 1
+                    if (parser.LineNumber == 1)     //row counter starts with 1
                     {
                         labelFields = parser.ReadFields();
                         nameColumnNumber = labelFields.Select((s) => s.ToLower()).ToList().IndexOf("name");

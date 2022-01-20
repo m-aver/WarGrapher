@@ -5,11 +5,6 @@ using FactoryAccessible = WarGrapher.ViewModels.ViewFactories.FactoryAccessibleA
 
 namespace WarGrapher.ViewModels
 {
-    #region REMARK
-    //выделил HasView в отдельный интерфейс, т.к. 
-    //периодически оно нужно во вспомогатательных интерфейсах различных ViewModel 
-    //(напр. IErrorRecorder или IDataSelector) 
-    #endregion
     internal interface IWindowViewModel
     {
         bool HasView { get; }

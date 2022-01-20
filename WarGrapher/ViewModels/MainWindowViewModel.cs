@@ -82,7 +82,7 @@ namespace WarGrapher.ViewModels
         {
             _subWindows
                 .Where(sw => sw is GraphWindowViewModel)
-                .ToList()       //копирование коллекции перед закрытием графиков - редактирование исходной коллекции во время перечисления по ней генерирует исключение
+                .ToList()       //fixing the source collection before closing graph windows
                 .ForEach<WindowViewModel>(gw =>
             {
                 if (gw.CloseViewCommand.CanExecute(null))

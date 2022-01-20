@@ -87,12 +87,6 @@ namespace WarGrapher.Models.Equipment
             EventHandler<ParamNotFoundEventArgs> paramNotFoundHandler = ParamNotFound;
             paramNotFoundHandler?.Invoke(this, new ParamNotFoundEventArgs(paramName));
         }
-
-        #region REMARK
-        //для хранения изображений лучше использовать BitmapImage, а не Image
-        //с Image возникает следующая проблема: один и тот же объект изображения не может одновременно отображаться в нескольких элементах
-        //приходится создавать несколько объектов, по одному на каждый элемент представления, основанных на одном и том же Bitmap
-        #endregion
     }
 
     public class ParamNotFoundEventArgs : EventArgs

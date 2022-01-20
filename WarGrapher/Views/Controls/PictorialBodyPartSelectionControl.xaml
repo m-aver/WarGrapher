@@ -33,16 +33,8 @@
                             </SolidColorBrush.Opacity>
                         </SolidColorBrush>
                     </Path.Fill>
-
-                    <!--StrokeThickness используется как вспомогательный параметр для анимации Opacity
-                        что позволяет обойти freezable issue и параметризировать начальное и конечное значение Opacity во время анимации
-                    
-                        SOURCES:
-                        https://stackoverflow.com/questions/2186933/wpf-animation-binding-to-the-to-attribute-of-storyboard-animation
-                        https://www.codeproject.com/Articles/239251/MathConverter-How-to-Do-Math-in-XAML
-                    
-                        можно было бы не использовать для этого свойство, влияющее на внешний вид, а добавить фиктивный скрытый контрол и использовать его свойства, но это загромоздит код
-                        или можно минимизировать влияние анимации на стороннее свойство StrokeThickness, уменьшив его изменение во время анимации и отмасштабировав на соответствующий коэф вычисления через MathConvertor-->
+                    <!--StrokeThickness is used as a helped parameter for animating the Opacity property
+                        that allows to walkaround the freezable issue and parametrize the initial and final values of Opacity during the animation-->
                 </Path>
 
                 <ControlTemplate.Triggers>
@@ -50,7 +42,6 @@
                         <Setter TargetName="path" Property="Fill" Value="{Binding Path=SelectionPartFill, ElementName=Control, Mode=OneWay}"/>
                     </Trigger>
 
-                    <!--MultiTrigger позволяет указать несколько условий-->
                     <MultiTrigger>
                         <MultiTrigger.Conditions>
                             <Condition Property="IsChecked" Value="False"/>
@@ -81,10 +72,10 @@
         <Canvas Width="{Binding ActualWidth, ElementName=img, Mode=OneWay}"
                 Height="{Binding ActualHeight, ElementName=img, Mode=OneWay}">
 
-            <!--слой картинки-->
+            <!--image layer-->
             <Image x:Name="img" Stretch="Fill" Source="{Binding Path=ImageSource, ElementName=Control, Mode=OneWay}"/>
 
-            <!--слой кнопок-->
+            <!--buttons layer-->
             <ListView Background="Transparent" BorderThickness="0" Margin="-1,-1,0,0"
                       Width="{Binding ActualWidth, ElementName=img, Mode=OneWay}" 
                       Height="{Binding ActualHeight, ElementName=img, Mode=OneWay}"
@@ -101,8 +92,6 @@
                                                     Command="{Binding Path=SelectionCommand, ElementName=Control, Mode=OneWay}"
                                                     CommandParameter="{Binding Path=BodyPart}"
                                                     IsChecked="{Binding Path=IsInitiallySelected, Mode=OneTime}"/>
-                                    <!--IsChecked первоначально устанавливается и выбор отображается, но не вызывается команда
-                                        поправил с помощью ручного вызова команды в обработчике изменений PartsData-->
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>

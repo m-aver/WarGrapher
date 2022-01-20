@@ -13,13 +13,6 @@ using WarGrapher.ViewModels.ViewFactories;
 
 namespace WarGrapher.ViewModels
 {
-    #region REMARK
-    //вроде бы кажется, что плодить подобные частные интерфейсы как-то не совсем правильно,
-    //но я думаю, что это всяко лучше, чем указывать жесткую ссылку на конкретный тип ViewModel
-    //во-первых, просто визуально лучше понятно как связанны между собой отдельные модули и что можно менять в данной ViewModel, не боясь нарушить работу остальных частей приложения
-    //во-вторых, помогает отделить интерфейс, необходимый для взаимодействия VM между собой, от интерфейса представления 
-    #endregion
-
     /// <summary>
     /// Represents an entity that uses features of a plot calculation object.
     /// </summary>
@@ -140,8 +133,6 @@ namespace WarGrapher.ViewModels
                 UnsubscribeGraphCommand.Execute(null);
         }
 
-
-        // TODO: выборочное обновление графиков (а не всех сразу при малейшем изменении)
         private void RefreshSeries()
         {
             DataSeries.Clear();

@@ -87,11 +87,6 @@ namespace WarGrapher.ViewModels
 
         private void HandleModelError(object sender, ModelErrorEventArgs e)
         {
-            #region REMARK
-            //хз мб передавать ErrorType через ModelErrorEventArgs, 
-            //а то получается надо любые возможные типы исключений проверять
-            //можно даже делать это через свойство Data самого Exception, пожалуй это наиболее адекватный варик 
-            #endregion
             if (!e.Handled &&
                 (e.Exception is System.IO.FileFormatException ||
                  e.Exception is System.IO.FileNotFoundException ||

@@ -85,10 +85,6 @@ namespace WarGrapher.Views.Controls
             get { return (IReadOnlyCollection<PartInfo>)GetValue(PartsDataProperty); }
             set { SetValue(PartsDataProperty, value); }
         }
-        #region REMARK
-        // PartsData хорошо бы определять как HashSet,
-        // но тогда нельзя будет напрямую установить его через x:Array в XAML
-        #endregion
 
         /// <summary>
         /// Gets or sets the command that executes when a body part is selected.

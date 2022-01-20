@@ -4,14 +4,6 @@ using WarGrapher.Models.Equipment;
 
 namespace WarGrapher.Models
 {
-    #region REMARK
-    /*
-     * разделил IModel на несколько интерфейсов
-     * каждый из которых ответственнен за определенную часть функционала
-     * что позволяет предоставлять различным модулям приложения лишь необходимый им функционал
-     */
-    #endregion
-
     /// <summary>
     /// Provides interaction with the application data model to the viewmodels layer.
     /// </summary>

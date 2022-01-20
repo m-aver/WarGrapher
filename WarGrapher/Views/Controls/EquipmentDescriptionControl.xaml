@@ -61,8 +61,6 @@
                                     <Setter Property="Background" Value="{Binding Path=HeaderRowBackground, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay}"/>
                                     <Setter Property="BorderBrush" Value="{Binding Path=HeaderRowBorderBrush, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay}"/>
                                     <Setter Property="BorderThickness" Value="0"/>
-                                    <!--чот хреново работает масштабирование столбцов, если задавать через стили-->
-                                    <!--OLD--> <!--<Setter Property="Width" Value="{Binding Path=ActualWidth ,RelativeSource={RelativeSource AncestorType=ListView}, Mode=OneWay, Converter={StaticResource ColumnWidthConverter}, ConverterParameter=2}"/>-->
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
 
@@ -79,8 +77,8 @@
                                     <DataTemplate>
                                         <Border BorderBrush="{Binding Path=TableBorderBrush, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay}" 
                                                 BorderThickness="{Binding Path=TableBorderThickness, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay, Converter={StaticResource ThicknessConverter}, ConverterParameter=0;0;1;0}"
-                                                Margin="0,0,-7,0">
-                                            <!-- right margin = -7 т.к. в GridView есть какое-то встроенное смещение колонок -->
+                                                Margin="0,0,-7,0">                                            
+                                            <!--right margin = -7 because some embeded column offset exist in GridView-->
 
                                             <TextBlock Background="Transparent"
                                                        Text="{Binding Path=Name, Mode=OneWay}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>

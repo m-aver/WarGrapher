@@ -21,7 +21,7 @@ namespace WarGrapher.Models
         /// <summary>
         /// Gets or sets the value that indicates whether the exception was handled.
         /// </summary>
-        public bool Handled { get; set; }       //если исключение не обработано, то необходимо будет выбросить его обратно
+        public bool Handled { get; set; }
 
         public ModelErrorEventArgs(Exception exception)
         {

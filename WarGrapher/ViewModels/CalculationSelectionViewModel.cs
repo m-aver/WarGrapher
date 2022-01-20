@@ -71,13 +71,6 @@ namespace WarGrapher.ViewModels
             _graphViewModel.Calculation = calcInstance;
         }
 
-        #region REMARK
-        /*
-         * извлечение типов расчета и создание экземпляра расчета со всеми вытекающими проверками
-         * можно было бы инкапсулировать в специализированной фабрике
-         * возможно туда же присобачить получение инфы из атрибутов
-         */
-        #endregion
         /// <summary>
         /// Retrieves an available calculation types and fills <see cref="CalculationsData"/> with them.
         /// </summary>

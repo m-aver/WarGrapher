@@ -22,11 +22,11 @@ namespace WarGrapher.Common
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
-            //получение типов из текущей сборки
+            //retrieving types from this assembly
             var types = new List<Type>();
             types.AddRange(Assembly.GetExecutingAssembly().GetAllDerivedClasses(type, false));
 
-            //получение типов из сторонних сборок, помещенных в папку приложения в виде .dll файлов
+            //retrieving types from foreign assemblies that is allocated in the root application folder as .dll files
             var dirPath = AppDomain.CurrentDomain.BaseDirectory;
             var dirInfo = new DirectoryInfo(dirPath);
 
@@ -139,13 +139,6 @@ namespace WarGrapher.Common
         /// </summary>
         internal static Enum[] GetFlags(this Enum value)
         {
-            #region REMARK
-            // при наличии флага 0 в константах перечисления, метод всегда будет включать соответствующую константу в возвращаемый результат
-            // это логично, т.к. никак нельзя определить был ли указан флаг 0 при одновременном наличии флага 1 в переданном перечислении
-            // и, наоборот, нельзя определить был ли он неуказан, если не указан флаг 1
-            // ведь флаг 1 перекрывает первый бит при своем наличии, либо оставляет его пустым при отсутствии
-            #endregion
-
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (value.GetType().GetCustomAttribute<FlagsAttribute>() == null)

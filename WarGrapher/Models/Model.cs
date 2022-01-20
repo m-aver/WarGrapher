@@ -234,7 +234,7 @@ namespace WarGrapher.Models
             errorOccured?.Invoke(this, arg);
 
             if (!arg.Handled)
-                throw new UnhandledModelException("an unhandled model exception", arg.Exception);    //обернуть новым исключением, чтобы не сбрасывать стек выбросов
+                throw new UnhandledModelException("an unhandled model exception", arg.Exception);
         }
     }
 

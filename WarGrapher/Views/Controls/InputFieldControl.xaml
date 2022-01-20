@@ -11,10 +11,6 @@
              xmlns:local="clr-namespace:WarGrapher.Views.Controls"         
              
              d:DesignHeight="300" d:DesignWidth="300">
-    <!--DataContext="{Binding RelativeSource={RelativeSource Self}}">-->
-    <!--WARNING: лучше не использовать DataContext для привязок внутренних элементов к свойствам UserConrol, 
-    т.к. его значение может быть перезаписано на стороне пользователя, что нарушит всю работу контрола-->
-    
     <UserControl.Resources>
 
         <Style x:Key="InputTextBoxStyle" TargetType="TextBox">
@@ -92,19 +88,6 @@
                 Click="ItemSelectionButtonClickHandler"
                 Command="{Binding Path=ButtonClickCommand, ElementName=UserControl, Mode=OneWay}"
                 CommandParameter="{Binding Path=ButtonClickCommandParameter, ElementName=UserControl, Mode=OneWay}">
-
-            <!--почему-то коряво работает назначение CommandParameter через встроенное поле у Button - всегда отправляется null  (с самой командой все хорошо)
-                Interaction.Triggers работает нормально и позволяет обойти этот баг или что это
-                но не деактивирует кнопку при возврате false из CanExecute-->
-            <!--
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="ItemSelectionButtonClicked" SourceName="UserControl">
-                    <i:InvokeCommandAction 
-                        Command="{Binding Path=ButtonClickCommand, ElementName=UserControl}"
-                        CommandParameter="{Binding Path=ButtonClickCommandParameter, ElementName=UserControl}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            -->
         </Button>
 
         <DockPanel Grid.Column="1" Grid.RowSpan="2" LastChildFill="False">

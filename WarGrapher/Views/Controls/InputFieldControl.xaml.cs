@@ -63,11 +63,11 @@ namespace WarGrapher.Views.Controls
             var textBox = (TextBox)sender;
             RefreshDataToInput(textBox.Text);
         }
-
+        
         private void SelectionItemChangedHandler(object sender, SelectionChangedEventArgs e)
         {
             string text = ItemList.SelectedItem?.ToString();
-            ItemList.SelectedItem = null;                       // важно присваивать значение текстовому блоку именно после установки SelectedItem в null
+            ItemList.SelectedItem = null;                       //importantly to assign a value to the text block after setting SelectedItem to null
             TextField.Text = text;
         }
 
@@ -170,10 +170,6 @@ namespace WarGrapher.Views.Controls
             }
         }
         private string _outputText;
-        #region REMARK
-        // атрибуты выставленны с целью инкапсуляции от внешнего кода
-        // вроде работает и не мешает привязке из родного XAML и валидации
-        #endregion
 
         // the helper handlers
         static private void HandleInputTextChanges(DependencyObject depObj, DependencyPropertyChangedEventArgs args)
@@ -183,11 +179,6 @@ namespace WarGrapher.Views.Controls
             control._textChangedFromOutside = true;
             control.TextField.Text = (string)args.NewValue;    
             control._textChangedFromOutside = false;
-
-            #region REMARK
-            //почему-то текстовое поле не хочет обновлятся по привязке, если уже был введен какой-то текст
-            //приходится обновлять вручную, плюс есть возможность добавить фильтрацию по программному вводу текста извне
-            #endregion
         }
 
         private void HandleTextChanges(object sender, TextChangedEventArgs e)

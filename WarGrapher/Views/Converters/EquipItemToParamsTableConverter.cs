@@ -33,16 +33,6 @@ namespace WarGrapher.Views.Converters
                     pn => new ItemParam(pn, equipItem.GetParam(pn))
                     ));
 
-                #region REMARK
-                //С помощью анонимных объектов тоже работает
-                /*
-                IEnumerable<object> @params = new List<object>(
-                    equipItem.GetParamNames().Select(
-                    pn => new { Name = pn, Value = equipItem.GetParam(pn) }
-                    ));
-                */
-                #endregion
-
                 return @params;
             }
             else
@@ -59,10 +49,6 @@ namespace WarGrapher.Views.Converters
             throw new NotImplementedException();
         }
 
-        #region REMARK
-        //можно было бы использовать анонимные объекты и не плодить лишний класс
-        //хотя конкретно здесь пожалуй отдельный класс к месту - сразу видно к каким полям будет сделана привязка в таблице 
-        #endregion
         private struct ItemParam
         {
             public string Name { get; }

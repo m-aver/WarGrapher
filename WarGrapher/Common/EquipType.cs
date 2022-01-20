@@ -2,12 +2,6 @@
 
 namespace WarGrapher.Common
 {
-    #region REMARK
-    // Flags
-    // возможность выбора нескольких видов экипировки
-    // артибут для типов расчета, указывающий какие виды экипировки могут понадобиться.  обработка в CanExecute кнопки расчета
-    #endregion
-
     /// <summary>
     /// Represents a type of specific sort of game equipment
     /// </summary>

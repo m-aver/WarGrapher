@@ -17,10 +17,6 @@ namespace WarGrapher.ViewModels
         /// </summary>
         [Bindable(false)]
         public EquipItem EquipItem { get; }
-        #region REMARK
-        // не очень хорошо делать EquipItem видимым для внешнего кода, т.к. можно будет получить к нему доступ из представления, но тогда хз как передавать его в классы модели
-        // [Bindable(false)] частично решает эту проблему 
-        #endregion
 
         private readonly WindowFactory _viewFactory;
         private readonly IErrorRecorder _errorViewModel;

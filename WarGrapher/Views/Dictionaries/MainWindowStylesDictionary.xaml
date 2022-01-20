@@ -226,7 +226,7 @@
             <Setter Property="BorderBrush" Value="SlateGray"/>
             <Setter Property="Border.CornerRadius" Value="0"/>
             <Setter Property="BorderThickness" Value="0,0.5"/>
-            <Setter Property="Margin" Value="0,-0.25"/>     <!--для взаимного перекрытия границ соседних кнопок-->
+            <Setter Property="Margin" Value="0,-0.25"/>     <!--for mutual overlap of borders of neighborn buttons-->
             <Setter Property="Padding" Value="0,2"/>
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -244,7 +244,7 @@
     </Style>
 
 
-    <!--подразумевается, что в DataContext будет передано количество новых ошибок-->
+    <!--assuming that the amount of new errors will pass in DataContext-->
     <Style x:Key="ErrorsCountTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Style.Resources>
             <Color x:Key="AttentionColor">LightYellow</Color>

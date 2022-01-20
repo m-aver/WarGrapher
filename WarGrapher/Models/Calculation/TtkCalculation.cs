@@ -35,7 +35,7 @@ namespace WarGrapher.Models.Calculation
             int maxHitNumber = 30;
             var output = new Dictionary<string, List<Point>>();
 
-            //сначала рассчитать границы урона для разного количества попаданий для текущей брони
+            //first calculate the damage tresholds for each hit amount on a current armor            
             double totalHP = bodyArmorData.HealthDefaultCapacity + bodyArmorData.ArmorDefaultCapacity + bodyArmorData.ArmorBonusCapacity;
             var damageLimits = new List<Tuple<int, double>>()
                 .Select(t => new { HitNumber = t.Item1, Damage = t.Item2 }).ToList();
@@ -45,8 +45,8 @@ namespace WarGrapher.Models.Calculation
                 double limitDamage = bodyArmorData.DamageAbsorb + totalHP / hitNum;
                 damageLimits.Add(new { HitNumber = hitNum, Damage = limitDamage });
             }
-
-            //затем найти где характеристика урона текущего оружия пересекает эти границы
+            
+            //then find where the damage characteristic of a current weapon crosses these theshold
             foreach (var weapon in weaponsData)
             {
                 var chartPoints = new List<Point>();                
@@ -59,7 +59,7 @@ namespace WarGrapher.Models.Calculation
                 chartPoints.Add(new Point(0, 0));
                 foreach (var limit in damageLimits)
                 {
-                    //получить дистанцию текущего граничного урона и рассчитать ТТК на этой дистанции 
+                    //get the distance of current theshold damage and calculate TTK at this distance
                     if (maxDamaage >= limit.Damage && minDamage <= limit.Damage)
                     {
                         double currentDistance = (maxDamaage - limit.Damage) / weapon.DropDamagePerMeter + weapon.Distance;
