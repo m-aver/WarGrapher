@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarGrapher", "WarGrapher\Wa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalCalculations", "ExternalCalculations\ExternalCalculations.csproj", "{16DC6F74-78BE-420A-844D-100B969C63F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{B1AF6430-91A5-412A-A5D3-3F66E2850EBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{16DC6F74-78BE-420A-844D-100B969C63F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16DC6F74-78BE-420A-844D-100B969C63F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16DC6F74-78BE-420A-844D-100B969C63F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1AF6430-91A5-412A-A5D3-3F66E2850EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1AF6430-91A5-412A-A5D3-3F66E2850EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1AF6430-91A5-412A-A5D3-3F66E2850EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1AF6430-91A5-412A-A5D3-3F66E2850EBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
