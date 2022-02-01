@@ -14,13 +14,8 @@ namespace WarGrapher.Models.Calculation
     [RequiredEquipment(EquipType.Weapon | EquipType.ArmArmor | EquipType.BodyArmor | EquipType.HeadArmor | EquipType.LegArmor)]
     public class TtkCalculation : PlotDataCalculation
     {
-        public override CalculationInfo ChartInfo { get; }
-
-        private double _maxDistance = 30;
-
-        public TtkCalculation()
-        {
-            ChartInfo = new CalculationInfo()
+        public override CalculationInfo ChartInfo { get; } =
+            new CalculationInfo()
             {
                 ChartName = "TTK chart",
                 XAxisName = "Distance",
@@ -28,6 +23,15 @@ namespace WarGrapher.Models.Calculation
                 YAxisName = "Time to kill",
                 YAxisUnit = "ms",
             };
+
+        private double _maxDistance = 30;
+
+        public TtkCalculation()
+        {
+        }
+
+        internal TtkCalculation(ISelectedDataConsumer model) : base(model)
+        {
         }
 
         protected override Dictionary<string, List<Point>> ExecuteCalculation()

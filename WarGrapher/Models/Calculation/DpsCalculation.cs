@@ -13,17 +13,21 @@ namespace WarGrapher.Models.Calculation
     [RequiredEquipment(EquipType.Weapon | EquipType.ArmArmor | EquipType.BodyArmor | EquipType.HeadArmor | EquipType.LegArmor)]
     public class DpsCalculation : DamageCalculation
     {
-        public override CalculationInfo ChartInfo { get; }
-
-        public DpsCalculation()
-        {
-            ChartInfo = new CalculationInfo()
+        public override CalculationInfo ChartInfo { get; } = 
+            new CalculationInfo()
             {
                 ChartName = "DPS chart",
                 XAxisName = "Distance",
                 XAxisUnit = "m",
                 YAxisName = "Damage per second"
             };
+
+        public DpsCalculation()
+        {
+        }
+
+        internal DpsCalculation(ISelectedDataConsumer model) : base(model)
+        {
         }
 
         protected override Dictionary<string, List<Point>> ExecuteCalculation()

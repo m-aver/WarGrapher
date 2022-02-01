@@ -13,19 +13,23 @@ namespace WarGrapher.Models.Calculation
     [RequiredEquipment(EquipType.Weapon)]
     public class DamageCalculation : PlotDataCalculation
     {
-        public override CalculationInfo ChartInfo { get; }
-
-        private double _maxDistance = 30;
-
-        public DamageCalculation()
-        {
-            ChartInfo = new CalculationInfo()
+        public override CalculationInfo ChartInfo { get; } =
+            new CalculationInfo()
             {
                 ChartName = "Damage chart",
                 XAxisName = "Distance",
                 XAxisUnit = "m",
                 YAxisName = "Damage"
             };
+
+        private double _maxDistance = 30;
+
+        public DamageCalculation()
+        {
+        }
+
+        internal DamageCalculation(ISelectedDataConsumer model) : base(model)
+        {
         }
 
         protected override Dictionary<string, List<Point>> ExecuteCalculation()

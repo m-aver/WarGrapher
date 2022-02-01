@@ -39,9 +39,21 @@ namespace WarGrapher.Models.Calculation
         private readonly ISelectedDataConsumer _model;
         private readonly EquipType[] _requiredEquipment;
 
-        public PlotDataCalculation()
+        /// <summary>
+        /// Creates a new calculation instance with the default application model.
+        /// </summary>
+        public PlotDataCalculation() : this(ModelFactory.ModelInstance)
         {
-            _model = ModelFactory.ModelInstance;
+        }
+
+        /// <summary>
+        /// Creates a new calculation instance with the passed application model.
+        /// </summary>
+        internal PlotDataCalculation(ISelectedDataConsumer model)
+        {
+            if (model == null) throw new ArgumentNullException(nameof(model));
+
+            _model = model;
 
             _requiredEquipment =
                 this.GetType().GetCustomAttribute<RequiredEquipmentAttribute>()?
@@ -80,9 +92,9 @@ namespace WarGrapher.Models.Calculation
         /// <exception cref="NoEquipmentDataException"/>
         private void RequestEquipmentData()
         {
-            weaponsData = _model.GetSelectedDataOfType(EquipType.Weapon).Cast<Weapon>().Distinct().ToArray();
-            bodyArmorData = _model.GetSelectedDataOfType(EquipType.BodyArmor).Cast<BodyArmor>().FirstOrDefault();
-            focusedBodyPartArmorData = _model.GetFocusedBodyPartData().FirstOrDefault();
+            weaponsData = _model.GetSelectedDataOfType(EquipType.Weapon)?.Cast<Weapon>().Distinct().ToArray();
+            bodyArmorData = _model.GetSelectedDataOfType(EquipType.BodyArmor)?.Cast<BodyArmor>().FirstOrDefault();
+            focusedBodyPartArmorData = _model.GetFocusedBodyPartData()?.FirstOrDefault();
             focusedBodyPart = _model.FocusedBodyPart;
 
             //validation
