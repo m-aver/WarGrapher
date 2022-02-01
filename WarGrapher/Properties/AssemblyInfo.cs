@@ -56,3 +56,4 @@ using System.Windows;
 
 //custom appends
 [assembly: InternalsVisibleTo("Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]      //for MOQ
