@@ -51,6 +51,7 @@
       <HintPath>..\packages\NUnit.3.13.2\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -61,6 +62,7 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -75,6 +77,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CalculationTests\DamageCalculationTest.cs" />
+    <Compile Include="CalculationTests\DpsCalculationTest.cs" />
+    <Compile Include="CalculationTests\Helpers\CalculationHelper.cs" />
+    <Compile Include="CalculationTests\Helpers\CalculationResultComparer.cs" />
+    <Compile Include="CalculationTests\Helpers\CalculationSourceData.cs" />
+    <Compile Include="CalculationTests\TtkCalculationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
